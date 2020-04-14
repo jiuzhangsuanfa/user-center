@@ -25,7 +25,7 @@
 │  │  │  └─Lean1Application
 │  │  └─resources
 │  │  │  ├─application.properties
-│  │  │  ├─sqlscript.sql
+│  │  │  ├─user_center_server.sql
 │  │  │  └─db.properties
 │  └─test
 ├─pom.xml
