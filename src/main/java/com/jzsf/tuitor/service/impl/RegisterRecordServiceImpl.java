@@ -25,8 +25,10 @@ public class RegisterRecordServiceImpl
     }
 
     @Override
-    public boolean checkRegister(String email) {
-        return registerRecordDao.findByEmail(email).size() >= 1;
+    public int checkRegister(String email, String username) {
+        // 增强返回逻辑，指明被注册的详细信息
+        return registerRecordDao.findByEmail(email).size() >= 1 ? 2 :
+                registerRecordDao.findByUsername(username) != null ? 1 : 0;
     }
 
     @Override

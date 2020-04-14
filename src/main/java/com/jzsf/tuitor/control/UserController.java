@@ -1,14 +1,13 @@
 package com.jzsf.tuitor.control;
 
-import com.jzsf.tuitor.common.token.Audience;
 import com.jzsf.tuitor.common.token.JwtIgnore;
-import com.jzsf.tuitor.common.token.JwtTokenUtil;
+import com.jzsf.tuitor.common.utils.JwtTokenUtil;
 import com.jzsf.tuitor.common.utils.MD5Utils;
 import com.jzsf.tuitor.pojo.User;
-import com.jzsf.tuitor.rpcDomain.LoginReq;
-import com.jzsf.tuitor.rpcDomain.RegisterReq;
-import com.jzsf.tuitor.rpcDomain.RespResult;
-import com.jzsf.tuitor.rpcDomain.ResultCode;
+import com.jzsf.tuitor.rpcDomain.common.RespResult;
+import com.jzsf.tuitor.rpcDomain.common.ResultCode;
+import com.jzsf.tuitor.rpcDomain.req.LoginReq;
+import com.jzsf.tuitor.rpcDomain.req.RegisterReq;
 import com.jzsf.tuitor.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -16,7 +15,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -25,7 +27,7 @@ import java.util.Map;
 /**
  * @author by plain yuan
  * @since 2020/04/12
- * 登录注册核心控制器
+ * 用户登录操作核心控制器
  */
 @Controller
 @RequestMapping(value = "/user")
@@ -36,8 +38,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private Audience audience;
 
     @PostMapping(value = "/getCaptcha", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
@@ -72,7 +72,7 @@ public class UserController {
             return new RespResult(ResultCode.USER_LOGIN_ERROR);
         }
         // generate token
-        String token = JwtTokenUtil.createJWT(user.getId(), user.getUsername(), audience);
+        String token = JwtTokenUtil.createJWT(user.getId(), user.getUsername());
         logger.info("用户 : " + user.getUsername() + " 登录成功");
         logger.info("token : " + token);
 
@@ -84,11 +84,5 @@ public class UserController {
         return RespResult.SUCCESS(result);
     }
 
-    @PostMapping(value = "/logout", produces = {MediaType.APPLICATION_JSON_VALUE})
-    @ResponseBody
-    public RespResult logout(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String token) {
-        JwtTokenUtil.setExpiration(token, audience.getBase64Secret());
-        return new RespResult(ResultCode.SUCCESS);
-    }
 
 }

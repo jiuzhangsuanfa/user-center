@@ -1,8 +1,8 @@
 package com.jzsf.tuitor.service;
 
 import com.jzsf.tuitor.pojo.User;
-import com.jzsf.tuitor.rpcDomain.RegisterReq;
-import com.jzsf.tuitor.rpcDomain.RespResult;
+import com.jzsf.tuitor.rpcDomain.common.RespResult;
+import com.jzsf.tuitor.rpcDomain.req.RegisterReq;
 import org.springframework.stereotype.Service;
 
 /**

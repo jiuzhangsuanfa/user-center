@@ -1,4 +1,4 @@
-package com.jzsf.tuitor.rpcDomain;
+package com.jzsf.tuitor.rpcDomain.common;
 
 /**
  * @author
@@ -16,6 +16,7 @@ public enum ResultCode {
     PARAM_IS_BLANK(10002, "参数为空"),
     PARAM_TYPE_BIND_ERROR(10003, "参数格式错误"),
     PARAM_NOT_COMPLETE(10004, "参数缺失"),
+    JSON_FORMAT_ERROR(10005, "请求数据解析异常，请检查JSON格式"),
 
     /* 用户错误：20001-29999*/
     USER_NOT_LOGGED_IN(20001, "用户未登录，请先登录"),
@@ -26,10 +27,11 @@ public enum ResultCode {
     USER_INVALID(20005, "无效用户，未激活或未注册"),
 
     REGISTER_CAPTCHA_SEND(20020, "验证码已发送，请前往邮箱验证"),
-    USER_HAS_REGISTERED(20021, "该用户名已注册，请验证后登录"),
-    REGISTERED_SUCCESS(20022, "注册成功"),
-    WRONG_CAPTCHA(20023, "验证码错误"),
-
+    USERNAME_HAS_USED(20021, "该用户名已被注册"),
+    MAIL_HAS_USED(20022, "该邮箱已被注册"),
+    REGISTERED_SUCCESS(20023, "注册成功"),
+    WRONG_CAPTCHA(20024, "验证码错误"),
+    MAIL_SEND_FAIL(20025, "发送验证码邮件失败, 请检查所填入的邮箱"),
 
     /* 业务错误：30001-39999 */
     BUSINESS_GROUP_NO_ALLOWED_DEL(30001, "应用分组已经被应用使用，不能删除"),
@@ -72,7 +74,9 @@ public enum ResultCode {
     PERMISSION_TOKEN_EXPIRED(70004, "token已过期"),
     PERMISSION_LIMIT(70005, "访问次数受限制"),
     PERMISSION_TOKEN_INVALID(70006, "无效token"),
-    PERMISSION_SIGNATURE_ERROR(70007, "签名失败");
+    PERMISSION_SIGNATURE_ERROR(70007, "签名失败"),
+
+    GENERAL_ERROR(80001, "服务器开小差了，等等再试吧");
 
     /**
      * 操作代码

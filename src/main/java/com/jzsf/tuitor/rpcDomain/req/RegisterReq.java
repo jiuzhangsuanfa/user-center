@@ -1,4 +1,4 @@
-package com.jzsf.tuitor.rpcDomain;
+package com.jzsf.tuitor.rpcDomain.req;
 
 /**
  * @author by plain yuan

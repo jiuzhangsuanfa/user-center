@@ -31,7 +31,7 @@ public class Address implements Serializable {
     private String city;
 
     @Column(name = "street_address", length = 16)
-    private String street_address;
+    private String streetAddress;
 
     public String getUserId() {
         return userId;
@@ -65,11 +65,11 @@ public class Address implements Serializable {
         this.city = city;
     }
 
-    public String getStreet_address() {
-        return street_address;
+    public String getStreetAddress() {
+        return streetAddress;
     }
 
-    public void setStreet_address(String street_address) {
-        this.street_address = street_address;
+    public void setStreetAddress(String street_address) {
+        this.streetAddress = street_address;
     }
 }

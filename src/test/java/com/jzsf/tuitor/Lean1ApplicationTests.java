@@ -15,24 +15,26 @@ import java.util.Date;
 @SpringBootTest
 public class Lean1ApplicationTests {
 
-	@Autowired
-	RegisterRecordService registerRecordService;
+    @Autowired
+    RegisterRecordService registerRecordService;
 
-	@Test
-	public void quickTest() throws Exception {
-		RegisterRecord record = new RegisterRecord();
-		record.setCaptcha("1234");
-		record.setEmail("17122366958@qq.com");
-		record.setId(registerRecordService.getUUID());
-		Date date = new java.util.Date();
-		record.setSendTime(date);
-		registerRecordService.save(record);
-		Assert.assertEquals("4", registerRecordService.count());
-	}
+    @Test
+    public void quickTest() throws Exception {
+        RegisterRecord record = new RegisterRecord();
+        record.setCaptcha("1234");
+        record.setEmail("17122366958@qq.com");
+        record.setId(registerRecordService.getUUID());
+        Date date = new java.util.Date();
+        record.setSendTime(date);
+        registerRecordService.save(record);
+        Assert.assertEquals("4", registerRecordService.count());
+    }
 
-	@Test
-	public void contextLoads() {
-		boolean b = registerRecordService.checkRegister("1229122464@qq.com");
-	}
+    @Test
+    public void contextLoads() {
+        Assert.assertEquals(1, registerRecordService.checkRegister("somemail@mail.com", "程咬金"));
+        Assert.assertEquals(2, registerRecordService.checkRegister("1229122464@qq.com", "sds"));
+        Assert.assertEquals(0, registerRecordService.checkRegister("17122366958@163.com", "username"));
+    }
 
 }

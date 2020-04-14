@@ -1,5 +1,8 @@
 package com.jzsf.tuitor.common.exception;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.jzsf.tuitor.rpcDomain.common.RespResult;
+import com.jzsf.tuitor.rpcDomain.common.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,9 +21,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     @ResponseBody
-    String handleException(Exception e) {
+    RespResult handleException(Exception e) {
+        if (e instanceof JsonParseException) {
+            return new RespResult(ResultCode.JSON_FORMAT_ERROR);
+        } else if (e instanceof CustomException) {
+            return new RespResult(((CustomException) e).getResultCode());
+        }
+        e.printStackTrace();
         logger.error(e.getMessage());
-        return "服务器开小差了，过会儿再试试吧ლ(′◉❥◉｀ლ)";
+        return new RespResult(ResultCode.GENERAL_ERROR);
     }
 
 }

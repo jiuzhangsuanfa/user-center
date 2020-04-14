@@ -1,8 +1,9 @@
 package com.jzsf.tuitor.service;
 
 import com.jzsf.tuitor.pojo.UserPreference;
-import com.jzsf.tuitor.rpcDomain.NoticeConfigReq;
-import com.jzsf.tuitor.rpcDomain.RespResult;
+import com.jzsf.tuitor.rpcDomain.common.RespResult;
+import com.jzsf.tuitor.rpcDomain.req.UserPreferenceReq;
+import com.jzsf.tuitor.rpcDomain.resp.UserPreferenceResp;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,19 +14,20 @@ import org.springframework.stereotype.Service;
 public interface UserPreferenceService extends BaseService<UserPreference, String> {
 
     /**
-     * 根据用户名，获取实体
+     * 根据用户名，获取偏好设置
      *
-     * @param username
+     * @param userId
      * @return
      */
-    RespResult<UserPreference> getByUserId(String username);
+    RespResult<UserPreferenceResp> getByUserId(String userId);
 
     /**
-     * 更新实体
+     * 根据userId更新个人偏好设置
      *
-     * @param noticeConfigReq
+     * @param req
+     * @param userId
      * @return
      */
-    RespResult updateSetting(NoticeConfigReq noticeConfigReq);
+    RespResult updateSetting(UserPreferenceReq req, String userId);
 
 }

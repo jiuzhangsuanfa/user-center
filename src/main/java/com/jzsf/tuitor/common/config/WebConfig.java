@@ -24,7 +24,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     /**
      * 跨域支持
-     *
      * @param registry
      */
     @Override

@@ -1,12 +1,17 @@
 package com.jzsf.tuitor.service.impl;
 
 import com.jzsf.tuitor.dao.UserProfileDao;
+import com.jzsf.tuitor.pojo.Address;
 import com.jzsf.tuitor.pojo.User;
 import com.jzsf.tuitor.pojo.UserProfile;
-import com.jzsf.tuitor.rpcDomain.RespResult;
-import com.jzsf.tuitor.rpcDomain.ResultCode;
+import com.jzsf.tuitor.rpcDomain.common.RespResult;
+import com.jzsf.tuitor.rpcDomain.common.ResultCode;
+import com.jzsf.tuitor.rpcDomain.req.UserProfileReq;
+import com.jzsf.tuitor.rpcDomain.resp.UserProfileResp;
+import com.jzsf.tuitor.service.AddressService;
 import com.jzsf.tuitor.service.UserProfileService;
 import com.jzsf.tuitor.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -27,6 +32,9 @@ public class UserProfileServiceImpl extends BaseServiceImpl<UserProfile, String>
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AddressService addressService;
+
     @Override
     protected JpaRepository getRepository() {
         return userProfileDao;
@@ -34,14 +42,42 @@ public class UserProfileServiceImpl extends BaseServiceImpl<UserProfile, String>
 
     @Override
     public RespResult getUserProfileInfo(String userId) {
-        Optional<User> user = userService.findById(userId);
-        if (!user.isPresent()) {
+        Optional<User> userOptional = userService.findById(userId);
+        if (!userOptional.isPresent()) {
             return new RespResult(ResultCode.USER_NOT_EXIST);
         }
-        UserProfile userProfile = userProfileDao.getOne(userId);
+        User user = userOptional.get();
+        UserProfile userProfile = userProfileDao.findById(userId).get();
+        Address address = addressService.findById(userId).get();
 
-        RespResult respResult = new RespResult(ResultCode.SUCCESS);
+        UserProfileResp respInfo = new UserProfileResp();
 
-        return respResult;
+        BeanUtils.copyProperties(user, respInfo);
+        BeanUtils.copyProperties(address, respInfo);
+        BeanUtils.copyProperties(userProfile, respInfo);
+        return new RespResult(ResultCode.SUCCESS, respInfo);
     }
+
+    @Override
+    public RespResult updateUserProfile(String userId, UserProfileReq userProfileReq) {
+        Optional<User> userOptional = userService.findById(userId);
+        if (!userOptional.isPresent()) {
+            return new RespResult(ResultCode.USER_NOT_EXIST);
+        }
+
+        User user = userOptional.get();
+        Address address = addressService.findById(userId).get();
+        UserProfile userProfile = userProfileDao.findById(userId).get();
+
+        BeanUtils.copyProperties(userProfileReq, user);
+        BeanUtils.copyProperties(userProfileReq, address);
+        BeanUtils.copyProperties(userProfileReq, userProfile);
+
+        userService.save(user);
+        addressService.save(address);
+        userProfileDao.save(userProfile);
+
+        return new RespResult(ResultCode.SUCCESS);
+    }
+
 }

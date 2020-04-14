@@ -20,7 +20,7 @@ public class MailServiceImpl implements MailService {
     private String from;
 
     @Override
-    public void sendSimpleMail(String to, String subject, String content) {
+    public boolean sendSimpleMail(String to, String subject, String content) {
         //创建SimpleMailMessage对象
         SimpleMailMessage message = new SimpleMailMessage();
         //发送人
@@ -31,8 +31,14 @@ public class MailServiceImpl implements MailService {
         message.setSubject(subject);
         //邮件内容
         message.setText(content);
-        //发送
-        mailSender.send(message);
+        try {
+            //发送
+            mailSender.send(message);
+        } catch (Exception e) {
+            // 发送失败
+            return false;
+        }
+        return true;
     }
 
 }

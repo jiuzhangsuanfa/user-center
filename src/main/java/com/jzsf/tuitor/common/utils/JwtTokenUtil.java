@@ -1,11 +1,13 @@
-package com.jzsf.tuitor.common.token;
+package com.jzsf.tuitor.common.utils;
 
 import com.jzsf.tuitor.common.exception.CustomException;
-import com.jzsf.tuitor.rpcDomain.ResultCode;
+import com.jzsf.tuitor.common.token.Audience;
+import com.jzsf.tuitor.rpcDomain.common.ResultCode;
 import io.jsonwebtoken.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
@@ -17,7 +19,8 @@ import java.util.Date;
  * @since 2020/04/13
  * JWT工具类
  */
-public class JwtTokenUtil {
+@Component
+public final class JwtTokenUtil {
 
     private static Logger log = LoggerFactory.getLogger(JwtTokenUtil.class);
 
@@ -25,17 +28,19 @@ public class JwtTokenUtil {
 
     public static final String TOKEN_PREFIX = "Bearer ";
 
+    private static Audience audience;
+
     /**
      * 解析jwt
      *
      * @param jsonWebToken
-     * @param base64Security
      * @return
      */
-    public static Claims parseJWT(String jsonWebToken, String base64Security) {
+    public static Claims parseJWT(String jsonWebToken) {
+        checkAudience();
         try {
             Claims claims = Jwts.parser()
-                    .setSigningKey(DatatypeConverter.parseBase64Binary(base64Security))
+                    .setSigningKey(DatatypeConverter.parseBase64Binary(audience.getBase64Secret()))
                     .parseClaimsJws(jsonWebToken)
                     .getBody();
             return claims;
@@ -53,10 +58,10 @@ public class JwtTokenUtil {
      *
      * @param userId
      * @param username
-     * @param audience
      * @return
      */
-    public static String createJWT(String userId, String username, Audience audience) {
+    public static String createJWT(String userId, String username) {
+        checkAudience();
         try {
             // 使用HS256加密算法
             SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -103,33 +108,41 @@ public class JwtTokenUtil {
      * 从token中获取用户名
      *
      * @param token
-     * @param base64Security
      * @return
      */
-    public static String getUsername(String token, String base64Security) {
-        return parseJWT(token, base64Security).getSubject();
+    public static String getUsername(String token) {
+        return parseJWT(token).getSubject();
     }
 
     /**
      * 从token中获取用户ID
      *
      * @param token
-     * @param base64Security
      * @return
      */
-    public static String getUserId(String token, String base64Security) {
-        return parseJWT(token, base64Security).get("userId", String.class);
+    public static String getUserId(String token) {
+        return parseJWT(token).get("userId", String.class);
     }
+
+    /**
+     * 从token中获取用户ID
+     *
+     * @param authorHeader
+     * @return
+     */
+    public static String getUserIdByAuthorHead(String authorHeader) {
+        return parseJWT(authorHeader.substring(7)).get("userId", String.class);
+    }
+
 
     /**
      * 是否已过期
      *
      * @param token
-     * @param base64Security
      * @return
      */
-    public static boolean isExpiration(String token, String base64Security) {
-        return parseJWT(token, base64Security).getExpiration().before(new Date());
+    public static boolean isExpiration(String token) {
+        return parseJWT(token).getExpiration().before(new Date());
     }
 
     /**
@@ -139,13 +152,8 @@ public class JwtTokenUtil {
         return StringUtils.isNotBlank(reqHeaderValue) ? reqHeaderValue.substring(7) : reqHeaderValue;
     }
 
-    /**
-     * 设置立即过期
-     */
-    public static void setExpiration(String token, String base64Security) {
-        parseJWT(token, base64Security).setExpiration(new Date(System.currentTimeMillis()));
+    private static void checkAudience() {
+        audience = audience == null ? SpringContextHolder.getBean(Audience.class) : audience;
     }
-
-    //todo token的刷新
 
 }

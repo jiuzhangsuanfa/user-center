@@ -26,7 +26,7 @@ public class Article implements Serializable {
     private String userId;
 
     @Column(name = "publish_time")
-    private Timestamp publish_time;
+    private Timestamp publishTime;
 
     @Column(name = "title", length = 16)
     private String title;
@@ -42,12 +42,12 @@ public class Article implements Serializable {
         this.id = id;
     }
 
-    public Timestamp getPublish_time() {
-        return publish_time;
+    public Timestamp getPublishTime() {
+        return publishTime;
     }
 
-    public void setPublish_time(Timestamp publish_time) {
-        this.publish_time = publish_time;
+    public void setPublishTime(Timestamp publish_time) {
+        this.publishTime = publish_time;
     }
 
     public String getTitle() {

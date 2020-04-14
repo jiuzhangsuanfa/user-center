@@ -16,6 +16,7 @@ import java.util.List;
  * @author by plain yuan
  * @since 2020/04/13
  * 校验entity字段的工具类
+ *
  */
 public final class BeanUtil {
 
@@ -52,7 +53,7 @@ public final class BeanUtil {
                         }
                     }
                     if (value == null) {
-                        errList.add(validateObj.getClass().getSimpleName() + " 中的 " + targetPd.getName() + " 不能为空");
+                        errList.add("字段 " + targetPd.getName() + " 不能为空");
                     }
                 } catch (Throwable ex) {
                     throw new FatalBeanException(

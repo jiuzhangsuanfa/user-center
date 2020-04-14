@@ -1,10 +1,13 @@
-package com.jzsf.tuitor.rpcDomain;
+package com.jzsf.tuitor.rpcDomain.common;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * @author by plain yuan
  * @since 2020/04/13
  * 响应结果实体
  */
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class RespResult<T> {
 
     /**

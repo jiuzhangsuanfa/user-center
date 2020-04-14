@@ -12,16 +12,16 @@ import org.springframework.stereotype.Service;
 public interface RegisterRecordService extends BaseService<RegisterRecord, String> {
 
     /**
-     * 查看当前邮箱是否被注册，大于等于1条已被注册
+     * 查看当前邮箱或用户名是否被注册
      *
      * @param email
-     * @return
+     * @param username
+     * @return 0:未注册 1:用户名占用 2:邮箱占用
      */
-    boolean checkRegister(String email);
+    int checkRegister(String email, String username);
 
     /**
      * 根据用户名获取注册时的验证码
-     *
      * @param username
      * @return
      */
