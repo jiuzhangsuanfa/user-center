@@ -92,8 +92,8 @@ public class AccountSettingController {
         String path = req.getServletContext().getRealPath("/file");
         // 获取原文件名
         String fileName = file.getOriginalFilename();
-        // 创建文件实例
-        File filePath = new File(path, fileName);
+        // 创建文件实例，每个用户一个文件夹，进行区分
+        File filePath = new File(userId + path, fileName);
         // 如果文件目录不存在，创建目录
         if (!filePath.getParentFile().exists()) {
             filePath.getParentFile().mkdirs();
@@ -105,12 +105,14 @@ public class AccountSettingController {
         } catch (IOException e) {
             logger.error("写入失败：", e.getMessage());
         }
+
         return new RespResult(ResultCode.SUCCESS);
     }
 
     @PostMapping(value = "/profile/load/avatar", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public RespResult loadAvatar(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue) {
+        // todo读取未完成
         return new RespResult(ResultCode.SUCCESS);
     }
 

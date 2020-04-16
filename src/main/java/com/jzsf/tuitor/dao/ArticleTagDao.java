@@ -2,8 +2,11 @@ package com.jzsf.tuitor.dao;
 
 import com.jzsf.tuitor.pojo.ArticleTag;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,15 +23,24 @@ public interface ArticleTagDao extends JpaRepository<ArticleTag, String> {
      * @param articleId
      * @return
      */
-    @Query(value = "select tagName from ArticleTag where articleId =?1")
-    List<String> findTagNameByArticleId(String articleId);
+    @Query("select tagName from ArticleTag where articleId =?1")
+    List<String> findTagNameByArticleId(@Param("articleId") String articleId);
 
     /**
      * 根据作者id删除文章的所有tag
      *
      * @param articleId
      */
+    @Modifying
+    @Transactional(rollbackFor = Exception.class)
     @Query("delete from ArticleTag  where articleId = ?1")
-    void deleteAllTagByArticleId(String articleId);
+    void deleteAllTagByArticleId(@Param("articleId") String articleId);
 
+    /**
+     * 查询文章id对应的该文章tag
+     *
+     * @param articleId
+     * @return
+     */
+    List<ArticleTag> findByArticleId(String articleId);
 }

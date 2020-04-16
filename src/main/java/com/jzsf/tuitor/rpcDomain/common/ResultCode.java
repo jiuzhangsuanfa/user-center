@@ -1,9 +1,12 @@
 package com.jzsf.tuitor.rpcDomain.common;
 
+import java.io.Serializable;
+
 /**
  * @author
  */
-public enum ResultCode {
+public enum ResultCode implements Serializable {
+
 
     /* 成功状态码 */
     SUCCESS(0, "操作成功"),
@@ -78,6 +81,8 @@ public enum ResultCode {
     PERMISSION_SIGNATURE_ERROR(70007, "签名失败"),
 
     GENERAL_ERROR(80001, "服务器开小差了...");
+
+    private static final long serialVersionUID = 5641380589921113508L;
 
     /**
      * 操作代码

@@ -3,6 +3,7 @@ package com.jzsf.tuitor.rpcDomain.resp;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,9 +11,12 @@ import java.util.List;
  * @author by plain yuan
  * @since 2020/04/15
  */
-public class ArticleResp {
+public class ArticleResp implements Serializable {
+
+    private static final long serialVersionUID = -3217970450240937504L;
 
     private String id;
+    private String userId;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date publishTime;
@@ -26,6 +30,15 @@ public class ArticleResp {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public Date getPublishTime() {

@@ -3,6 +3,7 @@ package com.jzsf.tuitor.rpcDomain.req;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import java.util.List;
  * @author by plain yuan
  * @since 2020/04/14
  */
-public class ArticleReq {
+public class ArticleReq implements Serializable {
+
+    private static final long serialVersionUID = 5641380589982113508L;
 
     private String id;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

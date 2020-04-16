@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author by plain yuan
  * @since 2020/04/13
@@ -22,5 +24,10 @@ public class UserTagServiceImpl
     @Override
     protected JpaRepository getRepository() {
         return userTagDao;
+    }
+
+    @Override
+    public List<String> getUserTagList(String userId) {
+        return userTagDao.getUserTagList(userId);
     }
 }

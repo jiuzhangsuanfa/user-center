@@ -1,10 +1,14 @@
 package com.jzsf.tuitor.rpcDomain.req;
 
+import java.io.Serializable;
+
 /**
  * @author by plain yuan
  * @since 2020/04/13
  */
-public class UserPreferenceReq {
+public class UserPreferenceReq implements Serializable {
+
+    private static final long serialVersionUID = 2705194087687017597L;
 
     private String todoNotice;
 

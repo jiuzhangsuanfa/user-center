@@ -2,13 +2,17 @@ package com.jzsf.tuitor.rpcDomain.common;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import java.io.Serializable;
+
 /**
  * @author by plain yuan
  * @since 2020/04/13
  * 响应结果实体
  */
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class RespResult<T> {
+public class RespResult<T> implements Serializable {
+
+    private static final long serialVersionUID = 623922752035245707L;
 
     /**
      * 操作代码
@@ -24,6 +28,7 @@ public class RespResult<T> {
      * 结果数据
      */
     T data;
+
 
     public RespResult() {
     }

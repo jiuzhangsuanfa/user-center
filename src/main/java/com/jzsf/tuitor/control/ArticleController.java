@@ -39,6 +39,7 @@ public class ArticleController {
     @ResponseBody
     public RespResult publish(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue,
                               @RequestBody ArticleReq req) {
+        // todo 文章标签和文章的保存这样耦合，是否合适
         String userId = JwtTokenUtil.getUserIdByAuthorHead(headerValue);
         return articleService.publishArticle(req, userId);
     }
@@ -59,11 +60,10 @@ public class ArticleController {
     @RequestMapping(value = "/show/detail", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public RespResult show(@RequestBody ArticleReq req) {
-        // todo 文章标签和文章的保存这样耦合，是否合适
         return articleService.showSingleArticle(req);
     }
 
-    @RequestMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/show/list", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public RespResult getArticleListByPageAble(@RequestBody @Validated PageInfoReq req) {
         Sort sort = new Sort(req.isDESC() ? Sort.Direction.DESC : Sort.Direction.ASC, req.getProperty());

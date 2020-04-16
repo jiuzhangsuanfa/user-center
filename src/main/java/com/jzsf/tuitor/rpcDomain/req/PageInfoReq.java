@@ -3,12 +3,15 @@ package com.jzsf.tuitor.rpcDomain.req;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * @author by plain yuan
  * @since 2020/04/15
  */
-public class PageInfoReq {
+public class PageInfoReq implements Serializable {
+
+    private static final long serialVersionUID = -5994404559402453133L;
 
     @Min(0)
     private Integer page;

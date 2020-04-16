@@ -14,10 +14,14 @@ import com.jzsf.tuitor.service.ArticleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -73,9 +77,13 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
     public RespResult deleteArticleByArticleId(String articleId) {
         if (StringUtils.isBlank(articleId)) {
             return new RespResult(ResultCode.PARAM_IS_BLANK, "文章id不能为空");
+        } else if (!articleDao.findById(articleId).isPresent()) {
+            return new RespResult(ResultCode.RESULT_DATA_NONE, "该文章不存在");
         }
         articleDao.deleteById(articleId);
-        articleTagDao.deleteAllTagByArticleId(articleId);
+        if (articleTagDao.findByArticleId(articleId).size() > 0) {
+            articleTagDao.deleteAllTagByArticleId(articleId);
+        }
         return new RespResult(ResultCode.SUCCESS);
     }
 
@@ -94,7 +102,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
         // todo 对文章标签的更新抉择：全部删除，全部插入，还是部分更新
 
         // 选择全部删除，每次更新文章，都要携带原有的标签信息
-        articleTagDao.deleteById(article.getId());
+        articleTagDao.deleteAllTagByArticleId(article.getId());
 
         if (req.getArticleTagList() != null) {
             ArticleTag articleTag;
@@ -129,5 +137,13 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
         } else {
             return new RespResult(ResultCode.RESULT_DATA_NONE);
         }
+    }
+
+    @Override
+    public List<Article> getRecentPublishedArticles() {
+        Pageable pageable = new PageRequest(0, 10, new Sort(Sort.Direction.DESC, "publishTime"));
+        List<Article> articleList = new ArrayList<>();
+        articleDao.findAll(pageable).forEach(articleList::add);
+        return articleList;
     }
 }

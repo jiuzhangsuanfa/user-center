@@ -1,11 +1,15 @@
 package com.jzsf.tuitor.rpcDomain.req;
 
+import java.io.Serializable;
+
 /**
  * @author by plain yuan
  * @since 2020/04/12
  * 携带注册信息请求的entity
  */
-public class RegisterReq {
+public class RegisterReq implements Serializable {
+
+    private static final long serialVersionUID = -690477244058984705L;
 
     private String username;
     private String password;

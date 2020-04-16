@@ -51,4 +51,12 @@ public interface UserService extends BaseService<User, String> {
      * @return
      */
     User getByUsername(String username);
+
+    /**
+     * 获取当前用户的用户中心信息
+     *
+     * @param userId
+     * @return
+     */
+    RespResult getAccountCenterInfo(String userId);
 }

@@ -5,6 +5,7 @@ import com.jzsf.tuitor.rpcDomain.common.RespResult;
 import com.jzsf.tuitor.rpcDomain.common.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,6 +32,9 @@ public class GlobalExceptionHandler {
             return new RespResult(((CustomException) e).getResultCode());
         } else if (e instanceof MissingServletRequestParameterException) {
             return new RespResult(ResultCode.REQ_PARAM_IS_BLANK);
+        } else if (e instanceof MethodArgumentNotValidException) {
+            return new RespResult(ResultCode.PARAM_TYPE_BIND_ERROR,
+                    ((MethodArgumentNotValidException) e).getBindingResult());
         } else {
             return new RespResult(ResultCode.GENERAL_ERROR);
         }

@@ -1,10 +1,14 @@
 package com.jzsf.tuitor.rpcDomain.req;
 
+import java.io.Serializable;
+
 /**
  * @author by plain yuan
  * @since 2020/04/14
  */
-public class UserProfileReq {
+public class UserProfileReq implements Serializable {
+
+    private static final long serialVersionUID = -8119755907886576088L;
 
     private String username;
     private String email;

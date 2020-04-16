@@ -5,6 +5,8 @@ import com.jzsf.tuitor.rpcDomain.common.RespResult;
 import com.jzsf.tuitor.rpcDomain.req.ArticleReq;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author by plain yuan
  * @since 2020/04/14
@@ -45,4 +47,11 @@ public interface ArticleService extends BaseService<Article, String> {
      * @return
      */
     RespResult showSingleArticle(ArticleReq req);
+
+    /**
+     * 查询最近发布的十篇文章
+     *
+     * @return
+     */
+    List<Article> getRecentPublishedArticles();
 }
