@@ -1,4 +1,4 @@
-package com.jzsf.tuitor.rpcDomain.req;
+package com.jzsf.tuitor.rpcDomain.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -8,9 +8,9 @@ import java.util.List;
 
 /**
  * @author by plain yuan
- * @since 2020/04/14
+ * @since 2020/04/15
  */
-public class ArticleReq {
+public class ArticleResp {
 
     private String id;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -19,14 +19,6 @@ public class ArticleReq {
     private String title;
     private String content;
     private List<String> articleTagList;
-
-    public List<String> getArticleTagList() {
-        return articleTagList;
-    }
-
-    public void setArticleTagList(List<String> articleTagList) {
-        this.articleTagList = articleTagList;
-    }
 
     public String getId() {
         return id;
@@ -60,4 +52,11 @@ public class ArticleReq {
         this.content = content;
     }
 
+    public List<String> getArticleTagList() {
+        return articleTagList;
+    }
+
+    public void setArticleTagList(List<String> articleTagList) {
+        this.articleTagList = articleTagList;
+    }
 }

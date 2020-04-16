@@ -2,10 +2,11 @@ package com.jzsf.tuitor.service.impl;
 
 import com.jzsf.tuitor.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * @author by plain yuan
@@ -73,9 +74,8 @@ public abstract class BaseServiceImpl<T, ID> implements BaseService<T, ID> {
     }
 
     @Override
-    public String getUUID() {
-        return UUID.randomUUID().toString();
+    public Page<T> findAll(Pageable pageable) {
+        return getRepository().findAll(pageable);
     }
-
 }
 

@@ -1,5 +1,6 @@
 package com.jzsf.tuitor;
 
+import com.jzsf.tuitor.common.utils.UUIDUtil;
 import com.jzsf.tuitor.pojo.RegisterRecord;
 import com.jzsf.tuitor.service.RegisterRecordService;
 import org.junit.Assert;
@@ -23,7 +24,7 @@ public class Lean1ApplicationTests {
         RegisterRecord record = new RegisterRecord();
         record.setCaptcha("1234");
         record.setEmail("17122366958@qq.com");
-        record.setId(registerRecordService.getUUID());
+        record.setId(UUIDUtil.getUUID());
         Date date = new java.util.Date();
         record.setSendTime(date);
         registerRecordService.save(record);

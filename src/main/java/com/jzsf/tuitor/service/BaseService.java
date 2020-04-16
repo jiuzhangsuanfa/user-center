@@ -1,5 +1,7 @@
 package com.jzsf.tuitor.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -62,6 +64,14 @@ public interface BaseService<T, ID> {
     Iterable<T> findAllById(Iterable<ID> ids);
 
     /**
+     * 分页查询
+     *
+     * @param pageable
+     * @return
+     */
+    Page<T> findAll(Pageable pageable);
+
+    /**
      * @return 获得总数据条数
      */
     Long count();
@@ -87,11 +97,5 @@ public interface BaseService<T, ID> {
      */
     void deleteAll(Iterable<? extends T> entities);
 
-    /**
-     * 返回一个uuid
-     *
-     * @return
-     */
-    String getUUID();
 
 }

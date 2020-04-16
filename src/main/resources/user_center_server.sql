@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 14/04/2020 10:09:32
+ Date: 16/04/2020 08:35:02
 */
 
 SET NAMES utf8mb4;
@@ -47,10 +47,12 @@ CREATE TABLE `article` (
 -- Table structure for article_tag
 -- ----------------------------
 DROP TABLE IF EXISTS `article_tag`;
-CREATE TABLE `article_tag` (
-  `article_id` varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文章id',
-  `tag_name` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标签内容JSON',
-  PRIMARY KEY (`article_id`) USING BTREE
+CREATE TABLE `article_tag`
+(
+    `article_id` varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文章id',
+    `tag_name`   varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标签内容JSON',
+    `id`         varchar(48) COLLATE utf8mb4_general_ci                       NOT NULL COMMENT '主键id',
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
@@ -70,16 +72,17 @@ CREATE TABLE `register_record` (
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `id` varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'id主键',
-  `password` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
-  `username` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,
-  `area_number` char(4) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `email` varchar(16) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `is_verified` char(1) COLLATE utf8mb4_general_ci DEFAULT '0',
-  `phone_number` varchar(16) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `user_username_index` (`username`)
+CREATE TABLE `user`
+(
+    `id`           varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'id主键',
+    `password`     varchar(64) COLLATE utf8mb4_general_ci                       NOT NULL,
+    `username`     varchar(16) COLLATE utf8mb4_general_ci                       NOT NULL,
+    `area_number`  char(4) COLLATE utf8mb4_general_ci     DEFAULT NULL,
+    `email`        varchar(48) COLLATE utf8mb4_general_ci DEFAULT NULL,
+    `is_verified`  char(1) COLLATE utf8mb4_general_ci     DEFAULT '0',
+    `phone_number` varchar(16) COLLATE utf8mb4_general_ci DEFAULT NULL,
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `user_username_index` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
@@ -110,9 +113,9 @@ CREATE TABLE `user_profile` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_tag`;
 CREATE TABLE `user_tag` (
-  `user_id` varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户id FK',
-  `tag_name` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标签名',
-  PRIMARY KEY (`user_id`) USING BTREE
+                            `user_id` varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户id FK',
+                            `tag_name` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标签名',
+                            PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 SET FOREIGN_KEY_CHECKS = 1;

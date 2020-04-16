@@ -45,10 +45,10 @@ public final class JwtTokenUtil {
                     .getBody();
             return claims;
         } catch (ExpiredJwtException eje) {
-            log.error("===== Token过期 =====", eje);
+            log.error("===== Token过期 =====", eje.getMessage());
             throw new CustomException(ResultCode.PERMISSION_TOKEN_EXPIRED);
         } catch (Exception e) {
-            log.error("===== Token解析异常 =====", e);
+            log.error("===== Token解析异常 =====", e.getMessage());
             throw new CustomException(ResultCode.PERMISSION_TOKEN_INVALID);
         }
     }

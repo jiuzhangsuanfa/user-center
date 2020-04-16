@@ -14,7 +14,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -22,10 +26,10 @@ import java.util.List;
  * @since 2020/04/13
  * 账户操作控制器
  */
-@RestController("/account")
-public class AccountController {
+@RestController("/account/settings")
+public class AccountSettingController {
 
-    private Logger logger = LoggerFactory.getLogger(AccountController.class);
+    private Logger logger = LoggerFactory.getLogger(AccountSettingController.class);
 
     @Autowired
     private UserPreferenceService userPreferenceService;
@@ -36,14 +40,14 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/settings/notice/show", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/notice/show", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public RespResult showNoticeConfig(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue) {
         String userId = JwtTokenUtil.getUserIdByAuthorHead(headerValue);
         return userPreferenceService.getByUserId(userId);
     }
 
-    @PostMapping(value = "/settings/notice/update", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/notice/update", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public RespResult updateNoticeConfig(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue,
                                          @RequestBody UserPreferenceReq noticeConfigReq) {
@@ -55,14 +59,14 @@ public class AccountController {
         return userPreferenceService.updateSetting(noticeConfigReq, userId);
     }
 
-    @PostMapping(value = "/settings/profile/show", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/profile/show", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public RespResult showProfile(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue) {
         String userId = JwtTokenUtil.getUserIdByAuthorHead(headerValue);
         return userProfileService.getUserProfileInfo(userId);
     }
 
-    @PostMapping(value = "/settings/profile/update", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/profile/update", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public RespResult updateProfile(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue,
                                     @RequestBody UserProfileReq userProfileReq) {
@@ -72,6 +76,42 @@ public class AccountController {
             return new RespResult(ResultCode.PARAM_IS_BLANK, validateMsg);
         }
         return userProfileService.updateUserProfile(userId, userProfileReq);
+    }
+
+    @PostMapping(value = "/profile/upload/avatar", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public RespResult upload(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue,
+                             @RequestParam("file") MultipartFile file, HttpServletRequest req) {
+        String userId = JwtTokenUtil.getUserIdByAuthorHead(headerValue);
+
+        // 判断上传文件是否合法
+        if (file.isEmpty()) {
+            return new RespResult(ResultCode.PARAM_IS_BLANK);
+        }
+        // 获取文件存储路径（绝对路径）
+        String path = req.getServletContext().getRealPath("/file");
+        // 获取原文件名
+        String fileName = file.getOriginalFilename();
+        // 创建文件实例
+        File filePath = new File(path, fileName);
+        // 如果文件目录不存在，创建目录
+        if (!filePath.getParentFile().exists()) {
+            filePath.getParentFile().mkdirs();
+            logger.info("创建目录" + filePath);
+        }
+        // 写入文件
+        try {
+            file.transferTo(filePath);
+        } catch (IOException e) {
+            logger.error("写入失败：", e.getMessage());
+        }
+        return new RespResult(ResultCode.SUCCESS);
+    }
+
+    @PostMapping(value = "/profile/load/avatar", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public RespResult loadAvatar(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue) {
+        return new RespResult(ResultCode.SUCCESS);
     }
 
 }

@@ -55,6 +55,7 @@ public class UserProfileServiceImpl extends BaseServiceImpl<UserProfile, String>
         BeanUtils.copyProperties(user, respInfo);
         BeanUtils.copyProperties(address, respInfo);
         BeanUtils.copyProperties(userProfile, respInfo);
+
         return new RespResult(ResultCode.SUCCESS, respInfo);
     }
 

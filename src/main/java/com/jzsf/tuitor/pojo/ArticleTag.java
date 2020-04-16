@@ -17,6 +17,9 @@ public class ArticleTag implements Serializable {
 
     private static final long serialVersionUID = -3786101565866282470L;
     @Id
+    @Column(name = "id")
+    private String id;
+
     @Column(name = "article_id", nullable = false, length = 48)
     private String articleId;
 
@@ -37,5 +40,17 @@ public class ArticleTag implements Serializable {
 
     public void setTagName(String tagName) {
         this.tagName = tagName;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

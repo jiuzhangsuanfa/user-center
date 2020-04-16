@@ -14,6 +14,7 @@ public enum ResultCode {
     /* 参数错误：10001-19999 */
     PARAM_IS_INVALID(10001, "参数无效"),
     PARAM_IS_BLANK(10002, "参数为空"),
+    REQ_PARAM_IS_BLANK(10006, "请求参数为空"),
     PARAM_TYPE_BIND_ERROR(10003, "参数格式错误"),
     PARAM_NOT_COMPLETE(10004, "参数缺失"),
     JSON_FORMAT_ERROR(10005, "请求数据解析异常，请检查JSON格式"),
@@ -76,7 +77,7 @@ public enum ResultCode {
     PERMISSION_TOKEN_INVALID(70006, "无效token"),
     PERMISSION_SIGNATURE_ERROR(70007, "签名失败"),
 
-    GENERAL_ERROR(80001, "服务器开小差了，等等再试吧");
+    GENERAL_ERROR(80001, "服务器开小差了...");
 
     /**
      * 操作代码
