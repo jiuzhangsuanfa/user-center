@@ -17,6 +17,7 @@ public class UserTag implements Serializable {
     private static final long serialVersionUID = -4687245119815613165L;
 
     @Id
+    @Column(name = "id", length = 128)
     private String id;
 
     @Column(name = "user_id", nullable = false, length = 48)
