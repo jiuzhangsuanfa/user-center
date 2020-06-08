@@ -21,16 +21,16 @@ public class Address implements Serializable {
     @Column(name = "user_id", nullable = false, length = 48)
     private String userId;
 
-    @Column(name = "country", length = 8)
+    @Column(name = "country", length = 8, nullable = false)
     private String country;
 
-    @Column(name = "province", length = 8)
+    @Column(name = "province", length = 8, nullable = false)
     private String province;
 
-    @Column(name = "city", length = 8)
+    @Column(name = "city", length = 8, nullable = false)
     private String city;
 
-    @Column(name = "street_address", length = 16)
+    @Column(name = "street_address", length = 16, nullable = false)
     private String streetAddress;
 
     public String getUserId() {

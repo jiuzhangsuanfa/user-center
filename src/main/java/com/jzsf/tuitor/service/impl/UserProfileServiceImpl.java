@@ -3,12 +3,14 @@ package com.jzsf.tuitor.service.impl;
 import com.jzsf.tuitor.dao.UserProfileDao;
 import com.jzsf.tuitor.pojo.Address;
 import com.jzsf.tuitor.pojo.User;
+import com.jzsf.tuitor.pojo.UserPreference;
 import com.jzsf.tuitor.pojo.UserProfile;
-import com.jzsf.tuitor.rpcDomain.common.RespResult;
-import com.jzsf.tuitor.rpcDomain.common.ResultCode;
-import com.jzsf.tuitor.rpcDomain.req.UserProfileReq;
-import com.jzsf.tuitor.rpcDomain.resp.UserProfileResp;
+import com.jzsf.tuitor.rpcdomain.common.RespResult;
+import com.jzsf.tuitor.rpcdomain.common.ResultCode;
+import com.jzsf.tuitor.rpcdomain.req.UserProfileReq;
+import com.jzsf.tuitor.rpcdomain.resp.UserProfileResp;
 import com.jzsf.tuitor.service.AddressService;
+import com.jzsf.tuitor.service.UserPreferenceService;
 import com.jzsf.tuitor.service.UserProfileService;
 import com.jzsf.tuitor.service.UserService;
 import org.springframework.beans.BeanUtils;
@@ -35,6 +37,9 @@ public class UserProfileServiceImpl extends BaseServiceImpl<UserProfile, String>
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private UserPreferenceService userPreferenceService;
+
     @Override
     protected JpaRepository getRepository() {
         return userProfileDao;
@@ -49,12 +54,14 @@ public class UserProfileServiceImpl extends BaseServiceImpl<UserProfile, String>
         User user = userOptional.get();
         UserProfile userProfile = userProfileDao.findById(userId).get();
         Address address = addressService.findById(userId).get();
+        UserPreference userPreference = userPreferenceService.findById(userId).get();
 
         UserProfileResp respInfo = new UserProfileResp();
 
         BeanUtils.copyProperties(user, respInfo);
         BeanUtils.copyProperties(address, respInfo);
         BeanUtils.copyProperties(userProfile, respInfo);
+        BeanUtils.copyProperties(userPreference, respInfo);
 
         return new RespResult(ResultCode.SUCCESS, respInfo);
     }
@@ -69,14 +76,17 @@ public class UserProfileServiceImpl extends BaseServiceImpl<UserProfile, String>
         User user = userOptional.get();
         Address address = addressService.findById(userId).get();
         UserProfile userProfile = userProfileDao.findById(userId).get();
+        UserPreference userPreference = userPreferenceService.findById(userId).get();
 
         BeanUtils.copyProperties(userProfileReq, user);
         BeanUtils.copyProperties(userProfileReq, address);
         BeanUtils.copyProperties(userProfileReq, userProfile);
+        BeanUtils.copyProperties(userProfileReq, userPreference);
 
         userService.save(user);
         addressService.save(address);
         userProfileDao.save(userProfile);
+        userPreferenceService.save(userPreference);
 
         return new RespResult(ResultCode.SUCCESS);
     }

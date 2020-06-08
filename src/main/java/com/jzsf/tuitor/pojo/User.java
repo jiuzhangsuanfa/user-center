@@ -28,16 +28,16 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false, length = 64)
     private String password;
 
-    @Column(name = "is_verified")
+    @Column(name = "is_verified", nullable = false)
     private String isVerified;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "area_number")
+    @Column(name = "area_number", nullable = false)
     private String areaNumber;
 
 

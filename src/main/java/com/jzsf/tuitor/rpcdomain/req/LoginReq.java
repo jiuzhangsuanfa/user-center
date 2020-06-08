@@ -1,4 +1,4 @@
-package com.jzsf.tuitor.rpcDomain.req;
+package com.jzsf.tuitor.rpcdomain.req;
 
 import java.io.Serializable;
 

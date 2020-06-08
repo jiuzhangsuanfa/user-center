@@ -3,7 +3,7 @@
  */
 package com.jzsf.tuitor.base;
 
-import com.jzsf.tuitor.rpcDomain.common.ResultCode;
+import com.jzsf.tuitor.rpcdomain.common.ResultCode;
 
 /**
  * @author senyang

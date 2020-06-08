@@ -1,4 +1,4 @@
-package com.jzsf.tuitor.rpcDomain.common;
+package com.jzsf.tuitor.rpcdomain.common;
 
 import java.io.Serializable;
 
@@ -21,6 +21,10 @@ public enum ResultCode implements Serializable {
     PARAM_TYPE_BIND_ERROR(10003, "参数格式错误"),
     PARAM_NOT_COMPLETE(10004, "参数缺失"),
     JSON_FORMAT_ERROR(10005, "请求数据解析异常，请检查JSON格式"),
+    HTTP_METHOD_NOT_ALLOWED(10006, "不支持的 HTTP 请求方法，请查看文档"),
+    HTTP_MEDIA_TYPE_NOT_SUPPORT(10007, "HTTP MediaType 异常，请检查 Content-Type 是否为 application/json;charset=UTF-8 "),
+    MSG_NOT_ACCEPT(10008, "不能被处理的请求：请检查请求方法、请求头和参数详情"),
+
 
     /* 用户错误：20001-29999*/
     USER_NOT_LOGGED_IN(20001, "用户未登录，请先登录"),

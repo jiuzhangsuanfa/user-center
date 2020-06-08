@@ -4,10 +4,10 @@ import com.jzsf.tuitor.common.token.JwtIgnore;
 import com.jzsf.tuitor.common.utils.JwtTokenUtil;
 import com.jzsf.tuitor.common.utils.MD5Utils;
 import com.jzsf.tuitor.pojo.User;
-import com.jzsf.tuitor.rpcDomain.common.RespResult;
-import com.jzsf.tuitor.rpcDomain.common.ResultCode;
-import com.jzsf.tuitor.rpcDomain.req.LoginReq;
-import com.jzsf.tuitor.rpcDomain.req.RegisterReq;
+import com.jzsf.tuitor.rpcdomain.common.RespResult;
+import com.jzsf.tuitor.rpcdomain.common.ResultCode;
+import com.jzsf.tuitor.rpcdomain.req.LoginReq;
+import com.jzsf.tuitor.rpcdomain.req.RegisterReq;
 import com.jzsf.tuitor.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -15,10 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -29,6 +26,7 @@ import java.util.Map;
  * @since 2020/04/12
  * 用户登录操作核心控制器
  */
+@CrossOrigin
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {

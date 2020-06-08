@@ -19,19 +19,19 @@ public class RegisterRecord implements Serializable {
     private static final long serialVersionUID = -4928118636119976369L;
 
     @Id
-    @Column(name = "id", length = 128)
+    @Column(name = "id", length = 128, nullable = false)
     private String id;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "captcha")
+    @Column(name = "captcha", nullable = false)
     private String captcha;
 
-    @Column(name = "send_time")
+    @Column(name = "send_time", nullable = false)
     private Date sendTime;
 
     public String getId() {

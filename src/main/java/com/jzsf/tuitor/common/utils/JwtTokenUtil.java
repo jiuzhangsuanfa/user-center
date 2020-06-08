@@ -2,7 +2,7 @@ package com.jzsf.tuitor.common.utils;
 
 import com.jzsf.tuitor.common.exception.CustomException;
 import com.jzsf.tuitor.common.token.Audience;
-import com.jzsf.tuitor.rpcDomain.common.ResultCode;
+import com.jzsf.tuitor.rpcdomain.common.ResultCode;
 import io.jsonwebtoken.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

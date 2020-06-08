@@ -4,7 +4,7 @@ import com.jzsf.tuitor.common.exception.CustomException;
 import com.jzsf.tuitor.common.token.Audience;
 import com.jzsf.tuitor.common.token.JwtIgnore;
 import com.jzsf.tuitor.common.utils.JwtTokenUtil;
-import com.jzsf.tuitor.rpcDomain.common.ResultCode;
+import com.jzsf.tuitor.rpcdomain.common.ResultCode;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -21,10 +21,10 @@ public class UserProfile implements Serializable {
     @Column(name = "user_id", nullable = false, length = 48)
     private String userId;
 
-    @Column(name = "photo", length = 32)
+    @Column(name = "photo", length = 32, nullable = false)
     private String photo;
 
-    @Column(name = "personal_profile", length = 1024)
+    @Column(name = "personal_profile", length = 1024, nullable = false)
     private String personalProfile;
 
     public String getUserId() {

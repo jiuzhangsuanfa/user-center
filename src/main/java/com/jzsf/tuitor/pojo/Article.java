@@ -1,5 +1,8 @@
 package com.jzsf.tuitor.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,13 +28,15 @@ public class Article implements Serializable {
     @Column(name = "user_id", nullable = false, length = 48)
     private String userId;
 
-    @Column(name = "publish_time")
+    @Column(name = "publish_time", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp publishTime;
 
-    @Column(name = "title", length = 16)
+    @Column(name = "title", length = 16, nullable = false)
     private String title;
 
-    @Column(name = "content")
+    @Column(name = "content", nullable = false)
     private String content;
 
     public String getId() {

@@ -4,7 +4,7 @@
 package com.jzsf.tuitor.service.impl;
 
 import com.jzsf.tuitor.common.utils.RandomCaptcha;
-import com.jzsf.tuitor.rpcDomain.req.RegisterReq;
+import com.jzsf.tuitor.rpcdomain.req.RegisterReq;
 import com.jzsf.tuitor.service.MailService;
 import com.jzsf.tuitor.service.ToolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +39,8 @@ public class ToolServiceImpl implements ToolService {
     @Override
     public boolean sendRegisterMail(RegisterReq req) {
         captcha = this.getCaptcha();
+        req.setCaptcha(captcha);
+
         StringBuilder contentBuilder = new StringBuilder();
         contentBuilder.append("您好，").append(req.getUsername()).append("，您的验证码是 ：").append(captcha);
         String subject = "新用户注册";

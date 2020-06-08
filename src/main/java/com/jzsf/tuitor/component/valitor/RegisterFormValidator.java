@@ -4,9 +4,9 @@
 package com.jzsf.tuitor.component.valitor;
 
 import com.jzsf.tuitor.base.ValidateException;
-import com.jzsf.tuitor.rpcDomain.common.RespResult;
-import com.jzsf.tuitor.rpcDomain.common.ResultCode;
-import com.jzsf.tuitor.rpcDomain.req.RegisterReq;
+import com.jzsf.tuitor.rpcdomain.common.RespResult;
+import com.jzsf.tuitor.rpcdomain.common.ResultCode;
+import com.jzsf.tuitor.rpcdomain.req.RegisterReq;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

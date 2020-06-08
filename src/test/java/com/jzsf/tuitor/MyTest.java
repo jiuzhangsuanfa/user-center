@@ -4,7 +4,7 @@ import com.jzsf.tuitor.common.utils.JwtTokenUtil;
 import com.jzsf.tuitor.common.utils.MD5Utils;
 import com.jzsf.tuitor.dao.UserDao;
 import com.jzsf.tuitor.pojo.Address;
-import com.jzsf.tuitor.rpcDomain.req.UserProfileReq;
+import com.jzsf.tuitor.rpcdomain.req.UserProfileReq;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
@@ -35,13 +35,8 @@ public class MyTest {
         address.setCountry("China");
         UserProfileReq req = new UserProfileReq();
         BeanUtils.copyProperties(address, req);
-        System.out.println(req);
+        Assert.assertEquals(address.getStreetAddress(), req.getStreetAddress());
     }
 
-    @Test
-    public void jwtTest() {
-        String jwt = JwtTokenUtil.createJWT("123", "456");
-        System.out.println(jwt);
-    }
 
 }

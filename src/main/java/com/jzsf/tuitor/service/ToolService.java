@@ -3,7 +3,7 @@
  */
 package com.jzsf.tuitor.service;
 
-import com.jzsf.tuitor.rpcDomain.req.RegisterReq;
+import com.jzsf.tuitor.rpcdomain.req.RegisterReq;
 
 /**
  * @author senyang

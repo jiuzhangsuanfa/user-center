@@ -1,4 +1,4 @@
-package com.jzsf.tuitor.rpcDomain.common;
+package com.jzsf.tuitor.rpcdomain.common;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 

@@ -1,10 +1,10 @@
 package com.jzsf.tuitor.control;
 
 import com.jzsf.tuitor.common.utils.JwtTokenUtil;
-import com.jzsf.tuitor.rpcDomain.common.RespResult;
-import com.jzsf.tuitor.rpcDomain.common.ResultCode;
-import com.jzsf.tuitor.rpcDomain.req.ArticleReq;
-import com.jzsf.tuitor.rpcDomain.req.PageInfoReq;
+import com.jzsf.tuitor.rpcdomain.common.RespResult;
+import com.jzsf.tuitor.rpcdomain.common.ResultCode;
+import com.jzsf.tuitor.rpcdomain.req.ArticleReq;
+import com.jzsf.tuitor.rpcdomain.req.PageInfoReq;
 import com.jzsf.tuitor.service.ArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,15 +19,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
-
 /**
  * @author by plain yuan
  * @since 2020/04/14
  * 文章操作控制器
  */
-
-@RequestMapping("/article")
+@CrossOrigin
 @Controller
+@RequestMapping("/article")
 public class ArticleController {
 
     private Logger logger = LoggerFactory.getLogger(AccountSettingController.class);
@@ -72,3 +71,4 @@ public class ArticleController {
     }
 
 }
+
