@@ -5,7 +5,7 @@ package com.jzsf.tuitor.common.exception;
  * @since 2020/04/13
  */
 
-import com.jzsf.tuitor.rpcDomain.common.ResultCode;
+import com.jzsf.tuitor.rpcdomain.common.ResultCode;
 
 import java.text.MessageFormat;
 

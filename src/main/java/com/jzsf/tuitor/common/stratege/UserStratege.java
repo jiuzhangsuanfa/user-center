@@ -3,8 +3,8 @@
  */
 package com.jzsf.tuitor.common.stratege;
 
-import com.jzsf.tuitor.rpcDomain.common.RespResult;
-import com.jzsf.tuitor.rpcDomain.req.RegisterReq;
+import com.jzsf.tuitor.rpcdomain.common.RespResult;
+import com.jzsf.tuitor.rpcdomain.req.RegisterReq;
 
 /**
  * @author senyang

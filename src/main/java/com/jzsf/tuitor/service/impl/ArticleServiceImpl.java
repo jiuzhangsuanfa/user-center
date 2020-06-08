@@ -6,10 +6,10 @@ import com.jzsf.tuitor.dao.ArticleDao;
 import com.jzsf.tuitor.dao.ArticleTagDao;
 import com.jzsf.tuitor.pojo.Article;
 import com.jzsf.tuitor.pojo.ArticleTag;
-import com.jzsf.tuitor.rpcDomain.common.RespResult;
-import com.jzsf.tuitor.rpcDomain.common.ResultCode;
-import com.jzsf.tuitor.rpcDomain.req.ArticleReq;
-import com.jzsf.tuitor.rpcDomain.resp.ArticleResp;
+import com.jzsf.tuitor.rpcdomain.common.RespResult;
+import com.jzsf.tuitor.rpcdomain.common.ResultCode;
+import com.jzsf.tuitor.rpcdomain.req.ArticleReq;
+import com.jzsf.tuitor.rpcdomain.resp.ArticleResp;
 import com.jzsf.tuitor.service.ArticleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -89,18 +89,14 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
 
     @Override
     public RespResult updateArticleByAuthor(ArticleReq req, String userId) {
-        List<String> validateMsg = BeanUtil.validateProperty(req);
-        if (validateMsg.size() > 0) {
-            return new RespResult(ResultCode.PARAM_IS_BLANK, validateMsg);
-        }
-
         Article article = new Article();
         BeanUtils.copyProperties(req, article);
         article.setUserId(userId);
-        article.setPublishTime(new Timestamp(req.getPublishTime().getTime()));
+        if (req.getPublishTime() != null) {
+            article.setPublishTime(new Timestamp(req.getPublishTime().getTime()));
+        }
 
         // todo 对文章标签的更新抉择：全部删除，全部插入，还是部分更新
-
         // 选择全部删除，每次更新文章，都要携带原有的标签信息
         articleTagDao.deleteAllTagByArticleId(article.getId());
 
@@ -131,7 +127,6 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
             ArticleResp articleResp = new ArticleResp();
             Article article = optionalArticle.get();
             BeanUtils.copyProperties(article, articleResp);
-            articleResp.setPublishTime(new Date(article.getPublishTime().getNanos()));
             articleResp.setArticleTagList(articleTagDao.findTagNameByArticleId(req.getId()));
             return new RespResult(ResultCode.SUCCESS, articleResp);
         } else {

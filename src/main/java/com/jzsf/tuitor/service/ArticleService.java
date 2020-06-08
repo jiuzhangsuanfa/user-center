@@ -1,8 +1,8 @@
 package com.jzsf.tuitor.service;
 
 import com.jzsf.tuitor.pojo.Article;
-import com.jzsf.tuitor.rpcDomain.common.RespResult;
-import com.jzsf.tuitor.rpcDomain.req.ArticleReq;
+import com.jzsf.tuitor.rpcdomain.common.RespResult;
+import com.jzsf.tuitor.rpcdomain.req.ArticleReq;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,4 +54,5 @@ public interface ArticleService extends BaseService<Article, String> {
      * @return
      */
     List<Article> getRecentPublishedArticles();
+
 }

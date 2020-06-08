@@ -1,5 +1,6 @@
 package com.jzsf.tuitor;
 
+import com.jzsf.tuitor.common.utils.JwtTokenUtil;
 import com.jzsf.tuitor.common.utils.UUIDUtil;
 import com.jzsf.tuitor.pojo.RegisterRecord;
 import com.jzsf.tuitor.service.RegisterRecordService;
@@ -36,6 +37,12 @@ public class Lean1ApplicationTests {
         Assert.assertEquals(1, registerRecordService.checkRegister("somemail@mail.com", "程咬金"));
         Assert.assertEquals(2, registerRecordService.checkRegister("1229122464@qq.com", "sds"));
         Assert.assertEquals(0, registerRecordService.checkRegister("17122366958@163.com", "username"));
+    }
+
+    @Test
+    public void jwtTest() {
+        String token = JwtTokenUtil.createJWT("123", "456");
+        Assert.assertEquals("123",JwtTokenUtil.getUserId(token));
     }
 
 }

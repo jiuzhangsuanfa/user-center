@@ -1,9 +1,9 @@
 package com.jzsf.tuitor.service;
 
 import com.jzsf.tuitor.pojo.UserPreference;
-import com.jzsf.tuitor.rpcDomain.common.RespResult;
-import com.jzsf.tuitor.rpcDomain.req.UserPreferenceReq;
-import com.jzsf.tuitor.rpcDomain.resp.UserPreferenceResp;
+import com.jzsf.tuitor.rpcdomain.common.RespResult;
+import com.jzsf.tuitor.rpcdomain.req.UserPreferenceReq;
+import com.jzsf.tuitor.rpcdomain.resp.UserPreferenceResp;
 import org.springframework.stereotype.Service;
 
 /**

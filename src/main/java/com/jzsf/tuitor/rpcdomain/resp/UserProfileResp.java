@@ -1,4 +1,4 @@
-package com.jzsf.tuitor.rpcDomain.resp;
+package com.jzsf.tuitor.rpcdomain.resp;
 
 import java.io.Serializable;
 
@@ -8,36 +8,104 @@ import java.io.Serializable;
  */
 public class UserProfileResp implements Serializable {
 
+
     private static final long serialVersionUID = -943303242229672346L;
 
-    private String todoNotice;
+    private String username;
+    private String email;
+    private String personalProfile;
+    private String country;
+    private String province;
+    private String city;
+    private String streetAddress;
+    private String areaNumber;
+    private String phoneNumber;
 
-    private String sysMessageNotice;
-
-    private String otherUserMessageNotice;
-
-    public String getTodoNotice() {
-        return todoNotice;
+    public String getUsername() {
+        return username;
     }
 
-    public void setTodoNotice(String todoNotice) {
-        this.todoNotice = todoNotice;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getSysMessageNotice() {
-        return sysMessageNotice;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSysMessageNotice(String sysMessageNotice) {
-        this.sysMessageNotice = sysMessageNotice;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getOtherUserMessageNotice() {
-        return otherUserMessageNotice;
+    public String getPersonalProfile() {
+        return personalProfile;
     }
 
-    public void setOtherUserMessageNotice(String otherUserMessageNotice) {
-        this.otherUserMessageNotice = otherUserMessageNotice;
+    public void setPersonalProfile(String personalProfile) {
+        this.personalProfile = personalProfile;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getAreaNumber() {
+        return areaNumber;
+    }
+
+    public void setAreaNumber(String areaNumber) {
+        this.areaNumber = areaNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "UserProfileResp{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", personalProfile='" + personalProfile + '\'' +
+                ", country='" + country + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", streetAddress='" + streetAddress + '\'' +
+                ", areaNumber='" + areaNumber + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 
 }

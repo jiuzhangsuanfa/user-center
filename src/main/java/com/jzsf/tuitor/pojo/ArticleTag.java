@@ -17,13 +17,13 @@ public class ArticleTag implements Serializable {
 
     private static final long serialVersionUID = -3786101565866282470L;
     @Id
-    @Column(name = "id", length = 128)
+    @Column(name = "id", length = 128, nullable = false)
     private String id;
 
     @Column(name = "article_id", nullable = false, length = 48)
     private String articleId;
 
-    @Column(name = "tag_name", length = 1024)
+    @Column(name = "tag_name", length = 1024, nullable = false)
     private String tagName;
 
     public String getArticleId() {

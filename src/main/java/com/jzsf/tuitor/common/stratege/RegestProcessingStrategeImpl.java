@@ -8,9 +8,9 @@ import com.jzsf.tuitor.common.utils.UUIDUtil;
 import com.jzsf.tuitor.dao.UserDao;
 import com.jzsf.tuitor.pojo.RegisterRecord;
 import com.jzsf.tuitor.pojo.User;
-import com.jzsf.tuitor.rpcDomain.common.RespResult;
-import com.jzsf.tuitor.rpcDomain.common.ResultCode;
-import com.jzsf.tuitor.rpcDomain.req.RegisterReq;
+import com.jzsf.tuitor.rpcdomain.common.RespResult;
+import com.jzsf.tuitor.rpcdomain.common.ResultCode;
+import com.jzsf.tuitor.rpcdomain.req.RegisterReq;
 import com.jzsf.tuitor.service.RegisterRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,9 +44,10 @@ public class RegestProcessingStrategeImpl implements UserStratege {
 
             // 保存用户
             User user = new User();
+            user.setId(UUIDUtil.getUUID());
             user.setUsername(req.getUsername());
             user.setPassword(MD5Utils.getMD5(req.getPassword()));
-            user.setId(UUIDUtil.getUUID());
+            user.setEmail(req.getEmail());
             userDao.save(user);
             return new RespResult(ResultCode.REGISTER_CAPTCHA_SEND);
         } else {

@@ -1,4 +1,4 @@
-package com.jzsf.tuitor.rpcDomain.resp;
+package com.jzsf.tuitor.rpcdomain.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
