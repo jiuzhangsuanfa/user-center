@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @CrossOrigin
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(path = "user")
 public class UserController {
 
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -41,36 +41,36 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/getCaptcha", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(path = "getCaptcha", produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     @JwtIgnore
     public RespResult getCaptcha(@RequestBody RegisterReq reqInfo) {
         return userService.beforeRegister(reqInfo);
     }
 
-    @PostMapping(value = "/register", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(path = "register", produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     @JwtIgnore
     public RespResult register(@RequestBody RegisterReq reqInfo) {
         // 先校验验证码
         if (!userService.checkCaptcha(reqInfo)) {
-            return new RespResult(ResultCode.WRONG_CAPTCHA);
+            return new RespResult<>(ResultCode.WRONG_CAPTCHA);
         }
         // 执行注册
         return userService.registerUser(reqInfo);
     }
 
-    @PostMapping(value = "/login", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(path = "login", produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     @JwtIgnore
     public RespResult login(HttpServletResponse response, @RequestBody LoginReq loginReq) {
         User user = userService.getByUsername(loginReq.getUsername());
         if (!userService.checkValid(user)) {
-            return new RespResult(ResultCode.USER_INVALID);
+            return new RespResult<>(ResultCode.USER_INVALID);
         }
         // check password
         if (!StringUtils.equals(user.getPassword(), MD5Utils.getMD5(loginReq.getPassword()))) {
-            return new RespResult(ResultCode.USER_LOGIN_ERROR);
+            return new RespResult<>(ResultCode.USER_LOGIN_ERROR);
         }
         // generate token
         String token = JwtTokenUtil.createJWT(user.getId(), user.getUsername());
@@ -80,7 +80,7 @@ public class UserController {
         // 将token放在响应头
         response.setHeader(JwtTokenUtil.AUTH_HEADER_KEY, JwtTokenUtil.TOKEN_PREFIX + token);
         // 将token响应给客户端
-        Map<String, String> result = new HashMap();
+        Map<String, String> result = new HashMap<>();
         result.put("token", token);
         return RespResult.success(result);
     }

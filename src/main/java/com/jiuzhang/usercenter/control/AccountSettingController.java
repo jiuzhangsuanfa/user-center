@@ -10,14 +10,12 @@ import com.jiuzhang.usercenter.rpcdomain.req.UserPreferenceReq;
 import com.jiuzhang.usercenter.rpcdomain.req.UserProfileReq;
 import com.jiuzhang.usercenter.service.UserPreferenceService;
 import com.jiuzhang.usercenter.service.UserProfileService;
-import com.jiuzhang.usercenter.service.UserService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -30,10 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @CrossOrigin
 @Controller
-@RequestMapping("/account/settings")
+@RequestMapping(path = "settings")
 public class AccountSettingController {
-
-    private Logger logger = LoggerFactory.getLogger(AccountSettingController.class);
 
     @Autowired
     private UserPreferenceService userPreferenceService;
@@ -41,17 +37,14 @@ public class AccountSettingController {
     @Autowired
     private UserProfileService userProfileService;
 
-    @Autowired
-    private UserService userService;
-
-    @PostMapping(value = "/notice/show", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(path = "notice", produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     public RespResult showNoticeConfig(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue) {
         String userId = JwtTokenUtil.getUserIdByAuthorHead(headerValue);
         return userPreferenceService.getByUserId(userId);
     }
 
-    @PostMapping(value = "/notice/update", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(path = "notice", produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     public RespResult updateNoticeConfig(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue,
             @RequestBody UserPreferenceReq noticeConfigReq) {
@@ -63,21 +56,21 @@ public class AccountSettingController {
         return userPreferenceService.updateSetting(noticeConfigReq, userId);
     }
 
-    @PostMapping(value = "/profile/show", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(path = "profile", produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     public RespResult showProfile(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue) {
         String userId = JwtTokenUtil.getUserIdByAuthorHead(headerValue);
         return userProfileService.getUserProfileInfo(userId);
     }
 
-    @PostMapping(value = "/profile/update", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(path = "profile", produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     public RespResult updateProfile(@RequestHeader(name = JwtTokenUtil.AUTH_HEADER_KEY) String headerValue,
             @RequestBody UserProfileReq userProfileReq) {
         String userId = JwtTokenUtil.getUserIdByAuthorHead(headerValue);
         List<String> validateMsg = BeanUtil.validateProperty(userProfileReq);
         if (validateMsg.size() > 0) {
-            return new RespResult(ResultCode.PARAM_IS_BLANK, validateMsg);
+            return new RespResult<>(ResultCode.PARAM_IS_BLANK, validateMsg);
         }
         return userProfileService.updateUserProfile(userId, userProfileReq);
     }
