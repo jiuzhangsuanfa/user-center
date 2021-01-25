@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Lean1ApplicationTests {
+public class UserCenterApplicationTests {
 
     @Autowired
     RegisterRecordService registerRecordService;
