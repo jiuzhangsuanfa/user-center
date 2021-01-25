@@ -94,16 +94,9 @@ public class UserProfileReq implements Serializable {
 
     @Override
     public String toString() {
-        return "UserProfileResp{" +
-                "username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", personalProfile='" + personalProfile + '\'' +
-                ", country='" + country + '\'' +
-                ", province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", streetAddress='" + streetAddress + '\'' +
-                ", areaNumber='" + areaNumber + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+        return "UserProfileResp{" + "username='" + username + '\'' + ", email='" + email + '\'' + ", personalProfile='"
+                + personalProfile + '\'' + ", country='" + country + '\'' + ", province='" + province + '\''
+                + ", city='" + city + '\'' + ", streetAddress='" + streetAddress + '\'' + ", areaNumber='" + areaNumber
+                + '\'' + ", phoneNumber='" + phoneNumber + '\'' + '}';
     }
 }

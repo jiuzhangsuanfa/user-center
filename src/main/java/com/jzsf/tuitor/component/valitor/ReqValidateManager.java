@@ -1,11 +1,12 @@
 /**
- * Alipay.com Inc. Copyright (c) 2004-2020 All Rights Reserved.
+ * Copyright (c) 2004-2020 All Rights Reserved.
  */
 package com.jzsf.tuitor.component.valitor;
 
 /**
  * @author senyang
- * @version $Id: ReqValiadateManager.java, v 0.1 2020年04月24日 3:43 PM senyang Exp $
+ * @version $Id: ReqValiadateManager.java, v 0.1 2020年04月24日 3:43 PM senyang Exp
+ *          $
  */
 public interface ReqValidateManager<T> {
 

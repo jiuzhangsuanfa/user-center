@@ -1,15 +1,14 @@
 package com.jzsf.tuitor.rpcdomain.common;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import java.io.Serializable;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * @author by plain yuan
- * @since 2020/04/13
- * 响应结果实体
+ * @since 2020/04/13 响应结果实体
  */
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@JsonSerialize
 public class RespResult<T> implements Serializable {
 
     private static final long serialVersionUID = 623922752035245707L;
@@ -29,7 +28,6 @@ public class RespResult<T> implements Serializable {
      */
     T data;
 
-
     public RespResult() {
     }
 
@@ -48,20 +46,20 @@ public class RespResult<T> implements Serializable {
         this.message = message;
     }
 
-    public static RespResult SUCCESS() {
-        return new RespResult(ResultCode.SUCCESS);
+    public static RespResult<ResultCode> success() {
+        return new RespResult<>(ResultCode.SUCCESS);
     }
 
-    public static <T> RespResult SUCCESS(T data) {
-        return new RespResult(ResultCode.SUCCESS, data);
+    public static <T> RespResult<T> success(T data) {
+        return new RespResult<>(ResultCode.SUCCESS, data);
     }
 
-    public static RespResult FAIL() {
-        return new RespResult(ResultCode.FAIL);
+    public static RespResult<ResultCode> fail() {
+        return new RespResult<>(ResultCode.FAIL);
     }
 
-    public static RespResult FAIL(String message) {
-        return new RespResult(message);
+    public static RespResult<String> fail(String message) {
+        return new RespResult<>(message);
     }
 
     public int getCode() {
@@ -87,4 +85,5 @@ public class RespResult<T> implements Serializable {
     public void setData(T data) {
         this.data = data;
     }
+
 }

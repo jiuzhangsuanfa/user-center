@@ -1,14 +1,12 @@
 package com.jzsf.tuitor;
 
-import com.jzsf.tuitor.common.utils.JwtTokenUtil;
 import com.jzsf.tuitor.common.utils.MD5Utils;
-import com.jzsf.tuitor.dao.UserDao;
 import com.jzsf.tuitor.pojo.Address;
 import com.jzsf.tuitor.rpcdomain.req.UserProfileReq;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author by plain yuan
@@ -16,10 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 public class MyTest {
-
-
-    @Autowired
-    private UserDao userDao;
 
     @Test
     public void testmd5() throws Exception {
@@ -37,6 +31,5 @@ public class MyTest {
         BeanUtils.copyProperties(address, req);
         Assert.assertEquals(address.getStreetAddress(), req.getStreetAddress());
     }
-
 
 }

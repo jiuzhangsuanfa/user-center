@@ -8,7 +8,6 @@ import java.io.Serializable;
  */
 public class UserProfileResp implements Serializable {
 
-
     private static final long serialVersionUID = -943303242229672346L;
 
     private String username;
@@ -95,17 +94,10 @@ public class UserProfileResp implements Serializable {
 
     @Override
     public String toString() {
-        return "UserProfileResp{" +
-                "username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", personalProfile='" + personalProfile + '\'' +
-                ", country='" + country + '\'' +
-                ", province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", streetAddress='" + streetAddress + '\'' +
-                ", areaNumber='" + areaNumber + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+        return "UserProfileResp{" + "username='" + username + '\'' + ", email='" + email + '\'' + ", personalProfile='"
+                + personalProfile + '\'' + ", country='" + country + '\'' + ", province='" + province + '\''
+                + ", city='" + city + '\'' + ", streetAddress='" + streetAddress + '\'' + ", areaNumber='" + areaNumber
+                + '\'' + ", phoneNumber='" + phoneNumber + '\'' + '}';
     }
 
 }

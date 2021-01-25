@@ -4,8 +4,7 @@ import java.io.Serializable;
 
 /**
  * @author by
- * @since 2020/04/12
- * 携带注册信息请求的entity
+ * @since 2020/04/12 携带注册信息请求的entity
  */
 public class RegisterReq implements Serializable {
 

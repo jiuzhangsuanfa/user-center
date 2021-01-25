@@ -1,5 +1,10 @@
 package com.jzsf.tuitor.service.impl;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import com.jzsf.tuitor.common.utils.BeanUtil;
 import com.jzsf.tuitor.common.utils.UUIDUtil;
 import com.jzsf.tuitor.dao.ArticleDao;
@@ -11,6 +16,7 @@ import com.jzsf.tuitor.rpcdomain.common.ResultCode;
 import com.jzsf.tuitor.rpcdomain.req.ArticleReq;
 import com.jzsf.tuitor.rpcdomain.resp.ArticleResp;
 import com.jzsf.tuitor.service.ArticleService;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +26,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
 /**
  * @author by plain yuan
  * @since 2020/04/14
  */
 @Service
-public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
-        implements ArticleService {
+public class ArticleServiceImpl extends BaseServiceImpl<Article, String> implements ArticleService {
 
     @Autowired
     private ArticleDao articleDao;
@@ -49,7 +48,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, String>
     public RespResult publishArticle(ArticleReq req, String userId) {
         List<String> validateMsg = BeanUtil.validateProperty(req, "id");
         if (validateMsg.size() > 0) {
-            return new RespResult(ResultCode.PARAM_IS_BLANK, validateMsg);
+            return new RespResult<>(ResultCode.PARAM_IS_BLANK, validateMsg);
         }
 
         Article article = new Article();

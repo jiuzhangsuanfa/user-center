@@ -1,5 +1,10 @@
 package com.jzsf.tuitor.control;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
 import com.jzsf.tuitor.common.token.JwtIgnore;
 import com.jzsf.tuitor.common.utils.JwtTokenUtil;
 import com.jzsf.tuitor.common.utils.MD5Utils;
@@ -9,22 +14,22 @@ import com.jzsf.tuitor.rpcdomain.common.ResultCode;
 import com.jzsf.tuitor.rpcdomain.req.LoginReq;
 import com.jzsf.tuitor.rpcdomain.req.RegisterReq;
 import com.jzsf.tuitor.service.UserService;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author by
- * @since 2020/04/12
- * 用户登录操作核心控制器
+ * @since 2020/04/12 用户登录操作核心控制器
  */
 @CrossOrigin
 @Controller
@@ -36,15 +41,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-    @PostMapping(value = "/getCaptcha", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/getCaptcha", produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     @JwtIgnore
     public RespResult getCaptcha(@RequestBody RegisterReq reqInfo) {
         return userService.beforeRegister(reqInfo);
     }
 
-    @PostMapping(value = "/register", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/register", produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     @JwtIgnore
     public RespResult register(@RequestBody RegisterReq reqInfo) {
@@ -56,8 +60,7 @@ public class UserController {
         return userService.registerUser(reqInfo);
     }
 
-
-    @PostMapping(value = "/login", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/login", produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     @JwtIgnore
     public RespResult login(HttpServletResponse response, @RequestBody LoginReq loginReq) {
@@ -79,8 +82,7 @@ public class UserController {
         // 将token响应给客户端
         Map<String, String> result = new HashMap();
         result.put("token", token);
-        return RespResult.SUCCESS(result);
+        return RespResult.success(result);
     }
-
 
 }

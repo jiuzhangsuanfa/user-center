@@ -1,11 +1,12 @@
 package com.jzsf.tuitor.rpcdomain.resp;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author by plain yuan
@@ -31,7 +32,6 @@ public class ArticleResp implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-
 
     public String getUserId() {
         return userId;

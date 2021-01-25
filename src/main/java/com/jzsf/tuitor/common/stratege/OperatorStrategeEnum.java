@@ -1,5 +1,5 @@
 /**
- * Alipay.com Inc. Copyright (c) 2004-2020 All Rights Reserved.
+ * Copyright (c) 2004-2020 All Rights Reserved.
  */
 package com.jzsf.tuitor.common.stratege;
 
@@ -37,7 +37,6 @@ public enum OperatorStrategeEnum {
      * 描述
      */
     private String desc;
-
 
     OperatorStrategeEnum(String code, String desc) {
         this.code = code;

@@ -1,13 +1,13 @@
 package com.jzsf.tuitor.common.exception;
 
+import java.text.MessageFormat;
+
 /**
  * @author by plain yuan
  * @since 2020/04/13
  */
 
 import com.jzsf.tuitor.rpcdomain.common.ResultCode;
-
-import java.text.MessageFormat;
 
 /**
  * 自定义异常类型
@@ -16,10 +16,12 @@ import java.text.MessageFormat;
  **/
 public class CustomException extends RuntimeException {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * 错误代码
      */
-    ResultCode resultCode;
+    final ResultCode resultCode;
 
     public CustomException(ResultCode resultCode) {
         super(resultCode.message());

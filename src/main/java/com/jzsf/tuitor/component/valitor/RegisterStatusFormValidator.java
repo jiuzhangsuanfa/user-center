@@ -1,5 +1,5 @@
 /**
- * Alipay.com Inc. Copyright (c) 2004-2020 All Rights Reserved.
+ * Copyright (c) 2004-2020 All Rights Reserved.
  */
 package com.jzsf.tuitor.component.valitor;
 
@@ -7,12 +7,14 @@ import com.jzsf.tuitor.base.ValidateException;
 import com.jzsf.tuitor.rpcdomain.common.ResultCode;
 import com.jzsf.tuitor.rpcdomain.req.RegisterReq;
 import com.jzsf.tuitor.service.RegisterRecordService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * @author senyang
- * @version $Id: RegisterStatusFormValidator.java, v 0.1 2020年04月24日 1:22 PM senyang Exp $
+ * @version $Id: RegisterStatusFormValidator.java, v 0.1 2020年04月24日 1:22 PM
+ *          senyang Exp $
  */
 @Service("RegisterStatusFormValidator")
 public class RegisterStatusFormValidator implements FormValidator {

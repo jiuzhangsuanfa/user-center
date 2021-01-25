@@ -1,5 +1,5 @@
 /**
- * Alipay.com Inc. Copyright (c) 2004-2020 All Rights Reserved.
+ * Copyright (c) 2004-2020 All Rights Reserved.
  */
 package com.jzsf.tuitor.component.valitor;
 
@@ -18,6 +18,5 @@ public interface FormValidator<T> {
      * @param aInPkg
      */
     void validate(T aInPkg);
-
 
 }

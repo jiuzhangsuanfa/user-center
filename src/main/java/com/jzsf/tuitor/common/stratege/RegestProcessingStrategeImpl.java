@@ -1,7 +1,9 @@
 /**
- * Alipay.com Inc. Copyright (c) 2004-2020 All Rights Reserved.
+ * Copyright (c) 2004-2020 All Rights Reserved.
  */
 package com.jzsf.tuitor.common.stratege;
+
+import java.util.Date;
 
 import com.jzsf.tuitor.common.utils.MD5Utils;
 import com.jzsf.tuitor.common.utils.UUIDUtil;
@@ -12,10 +14,9 @@ import com.jzsf.tuitor.rpcdomain.common.RespResult;
 import com.jzsf.tuitor.rpcdomain.common.ResultCode;
 import com.jzsf.tuitor.rpcdomain.req.RegisterReq;
 import com.jzsf.tuitor.service.RegisterRecordService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 /**
  * @author senyang

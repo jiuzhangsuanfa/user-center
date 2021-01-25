@@ -1,5 +1,5 @@
 /**
- * Alipay.com Inc. Copyright (c) 2004-2020 All Rights Reserved.
+ * Copyright (c) 2004-2020 All Rights Reserved.
  */
 package com.jzsf.tuitor.service.impl;
 
@@ -7,6 +7,7 @@ import com.jzsf.tuitor.common.utils.RandomCaptcha;
 import com.jzsf.tuitor.rpcdomain.req.RegisterReq;
 import com.jzsf.tuitor.service.MailService;
 import com.jzsf.tuitor.service.ToolService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,6 @@ public class ToolServiceImpl implements ToolService {
     public void setCaptcha(String captcha) {
         this.captcha = captcha;
     }
-
 
     @Override
     public String getCaptcha() {

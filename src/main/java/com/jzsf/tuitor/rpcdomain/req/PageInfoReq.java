@@ -1,9 +1,10 @@
 package com.jzsf.tuitor.rpcdomain.req;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 /**
  * @author by plain yuan
