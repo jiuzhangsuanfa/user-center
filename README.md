@@ -1,18 +1,14 @@
-# user-center
+# User Center
 
-用户中心的个人后端系统
+用户中心的个人后端系统。
 
-> 项目开发遵循阿里巴巴Java开发手册中定义的规范
-
-> API遵循RESTful风格
-
-> 前后端分离架构使用JSON进行数据交换
+[点击这里访问 Online Demo](https://demo.don.red/user-center/api).
 
 ## 项目结构
 
 标准maven项目结构
 
-```
+```tree
 ├─src
 │  └─main
 │  │  ├─java-com-jzsf-tuitor
@@ -22,7 +18,7 @@
 │  │  │  ├─dao
 │  │  │  ├─pojo
 │  │  │  ├─common
-│  │  │  └─Lean1Application
+│  │  │  └─UserCenterApplication
 │  │  └─resources
 │  │  │  ├─application.properties
 │  │  │  ├─user_center_server.sql
